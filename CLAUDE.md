@@ -11,11 +11,16 @@ where the agent is an off-the-shelf MCP host and the tool layer is a server you
 did not write.
 
 The whole content is `README.md` and `mcp/claude_desktop_config.json`: how the
-official Redis MCP server is secured with 1Password. There is no Valkey-native MCP
-server yet; the Redis one drives Valkey unchanged over the shared protocol. Its
-Valkey credential is the same read-only, PII-blind `agent` credential from the
-`controlling-blast-radius` branch, resolved by `op run` from an `op://` reference
-and never written in plaintext.
+AWS Labs Valkey MCP server (`awslabs.valkey-mcp-server`, run via `uvx`) is secured
+with 1Password. Its Valkey credential is the same read-only, PII-blind `agent`
+credential from the `controlling-blast-radius` branch, resolved by `op run` from
+an `op://` reference and never written in plaintext.
+
+The lesson here is defense in depth. The server ships a `--readonly` flag that
+disables its write and admin tools, so the branch layers two independent controls:
+`--readonly` at the tool and the read-only `agent` ACL at the database. Either
+alone blocks a write; keep both. The password env var the server reads is
+`VALKEY_PWD` (not `VALKEY_PASSWORD`).
 
 ## Do not
 

@@ -1,13 +1,13 @@
 {
   "mcpServers": {
-    "redis": {
+    "valkey": {
       "command": "/opt/homebrew/bin/op",
-      "args": ["run", "--", "/Users/riferrei/.local/bin/redis-mcp-server"],
+      "args": ["run", "--", "uvx", "awslabs.valkey-mcp-server@latest", "--readonly"],
       "env": {
-        "REDIS_HOST": "op://Agent Prod/valkey-mcp/host",
-        "REDIS_PORT": "op://Agent Prod/valkey-mcp/port",
-        "REDIS_USERNAME": "op://Agent Prod/valkey-mcp/username",
-        "REDIS_PWD": "op://Agent Prod/valkey-mcp/password"
+        "VALKEY_HOST": "op://Agent Prod/valkey-mcp/host",
+        "VALKEY_PORT": "op://Agent Prod/valkey-mcp/port",
+        "VALKEY_USERNAME": "op://Agent Prod/valkey-mcp/username",
+        "VALKEY_PWD": "op://Agent Prod/valkey-mcp/password"
       }
     }
   }
