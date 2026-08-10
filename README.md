@@ -74,14 +74,14 @@ comes up empty on SSNs.
 
 ### 4 · Securing an off-the-shelf MCP server
 
-In practice you'll adopt MCP servers you didn't build and can't add guardrails
-to. Here the agent is an MCP host (for example Claude Desktop) and the tool layer
-is the official [Redis MCP server][redis-mcp] (there's no Valkey-native one, and
-Valkey speaks the same protocol). 1Password secures *its* credential: the Valkey
-connection is an `op://` reference resolved by `op run` at spawn time
-(no secret in the config), and it's the same least-privilege credential from step 3.
-The host has the full generic Redis toolbelt and still can't read one SSN or
-change one record.
+In practice you'll adopt MCP servers you didn't build. Here the agent is an MCP
+host (for example Claude Desktop) and the tool layer is the [AWS Labs Valkey MCP
+server][valkey-mcp]. 1Password secures *its* credential: the Valkey connection is
+an `op://` reference resolved by `op run` at spawn time (no secret in the config),
+and it's the same least-privilege credential from step 3. Defense in depth — the
+server's own `--readonly` flag strips its write tools, and the read-only ACL
+credential strips them again — so the host can ask for anything and still can't
+read one SSN or change one record.
 
 ## Getting started
 
@@ -99,7 +99,7 @@ and a 1Password account. Note that 1Password offers trial accounts for you to pl
 with the product before committing with a credit card.
 
 [Ollama]: https://ollama.com
-[redis-mcp]: https://github.com/redis/mcp-redis
+[valkey-mcp]: https://github.com/awslabs/mcp/tree/main/src/valkey-mcp-server
 [op-cli]: https://developer.1password.com/docs/cli/
 [b1]: https://github.com/riferrei/securing-agent-secrets-1password/tree/env-vars-as-source-truth
 [b2]: https://github.com/riferrei/securing-agent-secrets-1password/tree/vaults-as-source-truth
