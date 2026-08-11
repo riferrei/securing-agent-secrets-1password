@@ -15,7 +15,7 @@ connection credential.
 
 This is the `controlling-blast-radius` branch. The secret already lives in
 1Password (the previous branch); now the agent's reach is scoped. It is issued a
-least-privilege Valkey credential — a read-only ACL user restricted to
+least-privilege Valkey credential: a read-only ACL user restricted to
 `~customer:*`, so it cannot read `pii:*` or write anything. 1Password holds both
 the admin and the agent credential; the app is only ever handed the agent one.
 Seeding, which needs writes, runs separately as a one-shot under the admin
