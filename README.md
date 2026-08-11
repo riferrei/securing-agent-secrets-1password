@@ -67,7 +67,8 @@ Add this to `~/Library/Application Support/Claude/claude_desktop_config.json`
         "VALKEY_HOST": "op://Agent Prod/valkey-mcp/host",
         "VALKEY_PORT": "op://Agent Prod/valkey-mcp/port",
         "VALKEY_USERNAME": "op://Agent Prod/valkey-mcp/username",
-        "VALKEY_PWD": "op://Agent Prod/valkey-mcp/password"
+        "VALKEY_PWD": "op://Agent Prod/valkey-mcp/password",
+        "MCP_LOG_FILE": "/tmp/valkey-mcp-server.log"
       }
     }
   }
