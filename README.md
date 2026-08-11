@@ -14,8 +14,8 @@ shrinks the blast radius so that even a fully hijacked agent can do little harm.
 
 The customer record splits into two keys: `customer:*` (business fields) and
 `pii:*` (email, phone, SSN, address), and the agent is issued a **least-privilege
-Valkey credential**: an ACL user scoped to `~customer:* +@read`. It cannot read
-`pii:*` and cannot write anything. **Valkey refuses, not the agent.** Talk it into
+Valkey credential**: an ACL user scoped to `~customer:* +@read +@connection +info`.
+It cannot read `pii:*` and cannot write anything. **Valkey refuses, not the agent.** Talk it into
 enumerating everyone and it still comes up empty on SSNs; ask it to change a
 record and the write is denied.
 

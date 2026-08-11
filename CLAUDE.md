@@ -31,7 +31,7 @@ UI (nginx)  ->  REST API (Go, :8000)  ->  Agent (Go)  ->  valkey-prod (as ACL us
 ```
 
 The agent connects to `valkey-prod` as the read-only `agent` ACL user
-(`~customer:* +@read`). A one-shot `seed` service loads the data as the admin
+(`~customer:* +@read +@connection +info`). A one-shot `seed` service loads the data as the admin
 user; the agent user cannot write. Both credentials live in one vault; the app
 is only ever handed the read-only one.
 
@@ -62,8 +62,9 @@ is only ever handed the read-only one.
 5. **Resolve, use, discard.** The credential is resolved from 1Password at
    startup, used to build the Valkey client, and never written anywhere else.
 6. **The agent's identity stays scoped.** The backend connects as the read-only
-   `agent` ACL user (`~customer:* +@read`). Do not widen it to the admin user or
-   give the backend the admin credential. Seeding, which needs write access, runs
+   `agent` ACL user (`~customer:* +@read +@connection +info`). Keep it read-only:
+   do not grant write or admin categories, widen the key pattern, or give the
+   backend the admin credential. Seeding, which needs write access, runs
    as a separate one-shot under the admin credential.
 
 ## The series
