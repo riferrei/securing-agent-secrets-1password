@@ -78,9 +78,9 @@ In practice you'll adopt MCP servers you didn't build. Here the agent is an MCP
 host (for example Claude Desktop) and the tool layer is the [AWS Labs Valkey MCP
 server][valkey-mcp]. 1Password secures *its* credential: the Valkey connection is
 an `op://` reference resolved by `op run` at spawn time (no secret in the config),
-and it's the same least-privilege credential from step 3. Defense in depth — the
+and it's the same least-privilege credential from step 3. Defense in depth: the
 server's own `--readonly` flag strips its write tools, and the read-only ACL
-credential strips them again — so the host can ask for anything and still can't
+credential strips them again, so the host can ask for anything and still can't
 read one SSN or change one record.
 
 ## Getting started
