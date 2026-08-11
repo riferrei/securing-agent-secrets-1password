@@ -53,7 +53,7 @@ access. A later branch scopes it to a read-only, PII-blind Valkey identity.
    string in the system prompt, tool descriptions, or any message sent to the
    model. It is only used by the Go code to open the Valkey connection.
 4. **No plaintext secret should ever be committed, except here, on purpose.**
-   This branch commits `.env` deliberately to make the risk concrete — the
+   This branch commits `.env` deliberately to make the risk concrete: the
    anti-pattern the branch exists to show. From the next branch on, the credential
    never touches disk or version control.
 5. **Resolve, use, discard.** The credential is read from the environment at
